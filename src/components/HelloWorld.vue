@@ -19,7 +19,6 @@
         ref="elForm"
         :inline="true"
         size="mini"
-        :rules="rules"
       >
         <template v-for="(k,index) in formData.lists">
           <el-form-item
@@ -65,6 +64,7 @@
 </template>
 
 <script>
+// 重复的校验规则:必填
 const baseRule = [
   { required: true, message: '请填写联系方式', trigger: 'blur' }
 ]
@@ -74,14 +74,13 @@ export default {
     return {
       formData: {
         lists: [{
-          concatWay: '',
-          concatValue: '',
-          rules: baseRule
+          concatWay: '',//联系方式：电话/手机
+          concatValue: '',//具体的联系方式的值
+          rules: baseRule//基础校验规则:必填
         }]
 
       },
-      rules: {},
-      inputRules: {
+      inputRules: {//设置好需要的校验规则
         telephone: { pattern: /^1[3-9]\d{9}$/, message: '手机号格式错误', trigger: 'blur' },
         phone: { pattern: /^\d{10,12}$/, message: '座机号格式错误', trigger: 'blur' },
         QQ: { pattern: /^[1-9][0-9]{4,14}$/, message: 'QQ格式错误', trigger: 'blur' },
